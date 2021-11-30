@@ -6,6 +6,8 @@ import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
     private double[] temperature;
     private int lastFreeIndex;
+    private final int MIN = -273;
+    private final int MAX = 273;
 
     public TemperatureSeriesAnalysis() {
         temperature = new double[]{};
@@ -21,7 +23,7 @@ public class TemperatureSeriesAnalysis {
         lastFreeIndex = 0;
         InputMismatchException wrongInput = null;
         for(double temp: temperatureSeries) {
-            if(temp < -273) {
+            if(temp < MIN) {
                 wrongInput = new InputMismatchException("Value " + temp + " is lower than -273°");
             } else {
                 filteredTemperatures[lastFreeIndex] = temp;
@@ -60,11 +62,11 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double min() {
-        return findTempClosestToValue(-273);
+        return findTempClosestToValue(MIN);
     }
 
     public double max() {
-        return findTempClosestToValue(273);
+        return findTempClosestToValue(MAX);
     }
 
     public double findTempClosestToZero() {
@@ -131,7 +133,7 @@ public class TemperatureSeriesAnalysis {
 
         InputMismatchException wrongInput = null;
         for(double temp: temps) {
-            if(temp < -273) {
+            if(temp < MIN) {
                 wrongInput = new InputMismatchException("Value " + temp + " is lower than -273°");
             } else {
                 if(lastFreeIndex == temperature.length) {
