@@ -24,8 +24,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAverageWithEmptyArray() {
-        double[] temperatureSeries = {};
-        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
 
         // expect exception here
         seriesAnalysis.average();
@@ -125,8 +124,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testClosestToValueWithEmptyArray() {
-        double[] temperatureSeries = {};
-        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
 
         // expect exception here
         seriesAnalysis.findTempClosestToValue(5);
