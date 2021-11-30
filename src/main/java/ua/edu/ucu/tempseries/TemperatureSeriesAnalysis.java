@@ -15,17 +15,17 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        if(temperatureSeries.length == 0) {
+        if (temperatureSeries.length == 0) {
             throw new IllegalArgumentException("Array is empty");
         }
 
         double[] filteredTemperatures = new double[temperatureSeries.length];
         lastFreeIndex = 0;
         InputMismatchException wrongInput = null;
-        for(double temp: temperatureSeries) {
-            if(temp < minTemperature) {
-                wrongInput = new InputMismatchException("Value " + temp +
-                        " is lower than -273°");
+        for (double temp: temperatureSeries) {
+            if (temp < minTemperature) {
+                wrongInput = new InputMismatchException("Value " + temp
+                        + " is lower than -273°");
             } else {
                 filteredTemperatures[lastFreeIndex] = temp;
                 lastFreeIndex++;
@@ -33,18 +33,18 @@ public class TemperatureSeriesAnalysis {
         }
         temperature = filteredTemperatures;
 
-        if(wrongInput != null) {
+        if (wrongInput != null) {
             throw wrongInput;
         }
     }
 
     public double average() {
-        if(lastFreeIndex == -1) {
+        if (lastFreeIndex == -1) {
             throw new IllegalArgumentException("Array is empty");
         }
 
         double sum = 0;
-        for(int i = 0; i < lastFreeIndex; i++) {
+        for (int i = 0; i < lastFreeIndex; i++) {
             sum += temperature[i];
         }
 
@@ -55,9 +55,9 @@ public class TemperatureSeriesAnalysis {
         double averageValue = average();
         double result = 0;
 
-        for(int i = 0; i < lastFreeIndex; i++) {
-            result += Math.abs(temperature[i] - averageValue) *
-                      Math.abs(temperature[i] - averageValue);
+        for (int i = 0; i < lastFreeIndex; i++) {
+            result += Math.abs(temperature[i] - averageValue)
+                    * Math.abs(temperature[i] - averageValue);
         }
 
         return result;
@@ -76,14 +76,14 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToValue(double tempValue) {
-        if(lastFreeIndex == -1) {
+        if (lastFreeIndex == -1) {
             throw new IllegalArgumentException("Array is empty");
         }
 
         double minDifference = Double.MAX_VALUE;
         double closestTemp = 0;
-        for(int i = 0; i < lastFreeIndex; i++) {
-            if(Math.abs(temperature[i] - tempValue) < minDifference) {
+        for (int i = 0; i < lastFreeIndex; i++) {
+            if (Math.abs(temperature[i] - tempValue) < minDifference) {
                 minDifference = Math.abs(temperature[i] - tempValue);
                 closestTemp = temperature[i];
             }
@@ -95,8 +95,8 @@ public class TemperatureSeriesAnalysis {
     public double[] findTempsLessThen(double tempValue) {
         double[] less = new double[lastFreeIndex];
         int currIndex = 0;
-        for(int i = 0; i < lastFreeIndex; i++) {
-            if(temperature[i] < tempValue) {
+        for (int i = 0; i < lastFreeIndex; i++) {
+            if (temperature[i] < tempValue) {
                 less[currIndex] = temperature[i];
                 currIndex++;
             }
@@ -108,8 +108,8 @@ public class TemperatureSeriesAnalysis {
     public double[] findTempsGreaterThen(double tempValue) {
         double[] greater = new double[lastFreeIndex];
         int currIndex = 0;
-        for(int i = 0; i < lastFreeIndex; i++) {
-            if(temperature[i] > tempValue) {
+        for (int i = 0; i < lastFreeIndex; i++) {
+            if (temperature[i] > tempValue) {
                 greater[currIndex] = temperature[i];
                 currIndex++;
             }
@@ -128,37 +128,37 @@ public class TemperatureSeriesAnalysis {
     }
 
     public int addTemps(double... temps) {
-        if(lastFreeIndex == -1) {
+        if (lastFreeIndex == -1) {
             temperature = new double[1];
             lastFreeIndex = 0;
         }
 
         InputMismatchException wrongInput = null;
-        for(double temp: temps) {
-            if(temp < minTemperature) {
-                wrongInput = new InputMismatchException("Value " + temp +
-                        " is lower than -273°");
+        for (double temp: temps) {
+            if (temp < minTemperature) {
+                wrongInput = new InputMismatchException("Value " + temp
+                        + " is lower than -273°");
             } else {
-                if(lastFreeIndex == temperature.length) {
+                if (lastFreeIndex == temperature.length) {
                     double[] resized = new double[temperature.length * 2];
-                    for(int i = 0; i < lastFreeIndex; i++) {
+                    for (int i = 0; i < lastFreeIndex; i++) {
                         resized[i] = temperature[i];
                     }
                     resized[lastFreeIndex] = temp;
                     temperature = resized;
-                }else {
+                } else {
                     temperature[lastFreeIndex] = temp;
                 }
                 lastFreeIndex++;
             }
         }
 
-        if(wrongInput != null) {
+        if (wrongInput != null) {
             throw wrongInput;
         }
 
         int sum = 0;
-        for(int i = 0; i < lastFreeIndex; i++) {
+        for (int i = 0; i < lastFreeIndex; i++) {
             sum += temperature[i];
         }
 
