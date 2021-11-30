@@ -6,8 +6,8 @@ import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
     private double[] temperature;
     private int lastFreeIndex;
-    private final int MIN = -273;
-    private final int MAX = 273;
+    private final int minTemperature = -273;
+    private final int maxTemperature = 273;
 
     public TemperatureSeriesAnalysis() {
         temperature = new double[]{};
@@ -23,8 +23,9 @@ public class TemperatureSeriesAnalysis {
         lastFreeIndex = 0;
         InputMismatchException wrongInput = null;
         for(double temp: temperatureSeries) {
-            if(temp < MIN) {
-                wrongInput = new InputMismatchException("Value " + temp + " is lower than -273°");
+            if(temp < minTemperature) {
+                wrongInput = new InputMismatchException("Value " + temp +
+                        " is lower than -273°");
             } else {
                 filteredTemperatures[lastFreeIndex] = temp;
                 lastFreeIndex++;
@@ -55,18 +56,19 @@ public class TemperatureSeriesAnalysis {
         double result = 0;
 
         for(int i = 0; i < lastFreeIndex; i++) {
-            result += Math.abs(temperature[i] - averageValue) * Math.abs(temperature[i] - averageValue);
+            result += Math.abs(temperature[i] - averageValue) *
+                      Math.abs(temperature[i] - averageValue);
         }
 
         return result;
     }
 
     public double min() {
-        return findTempClosestToValue(MIN);
+        return findTempClosestToValue(minTemperature);
     }
 
     public double max() {
-        return findTempClosestToValue(MAX);
+        return findTempClosestToValue(maxTemperature);
     }
 
     public double findTempClosestToZero() {
@@ -133,8 +135,9 @@ public class TemperatureSeriesAnalysis {
 
         InputMismatchException wrongInput = null;
         for(double temp: temps) {
-            if(temp < MIN) {
-                wrongInput = new InputMismatchException("Value " + temp + " is lower than -273°");
+            if(temp < minTemperature) {
+                wrongInput = new InputMismatchException("Value " + temp +
+                        " is lower than -273°");
             } else {
                 if(lastFreeIndex == temperature.length) {
                     double[] resized = new double[temperature.length * 2];
