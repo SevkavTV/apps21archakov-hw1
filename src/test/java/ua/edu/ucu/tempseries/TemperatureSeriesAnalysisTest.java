@@ -8,6 +8,12 @@ import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysisTest {
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateArrayWithWrongValues() {
+        double[] temperatureSeries = {-1.0, -300.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+    }
+
     @Test
     public void testAverageWithOneElementArray() {
         // setup input data and expected result
@@ -189,6 +195,13 @@ public class TemperatureSeriesAnalysisTest {
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 
         seriesAnalysis.addTemps(-300.0, 4.0);
+    }
+
+    @Test
+    public void testAddFromEmpty() {
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
+
+        assertEquals(seriesAnalysis.addTemps(1.0, 2.0), 3);
     }
 
     @Test
