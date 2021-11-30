@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 
 public class TemperatureSeriesAnalysisTest {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InputMismatchException.class)
     public void testCreateArrayWithWrongValues() {
         double[] temperatureSeries = {-1.0, -300.0};
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
